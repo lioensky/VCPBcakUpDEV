@@ -1,0 +1,6 @@
+__pycache__/
+backup/
+backups/
+env/
+.env
+config.env

@@ -69,6 +69,19 @@ def create_backup(source_dir=None, backup_attachments=False, backup_tts_cache=Fa
                         arcname = os.path.relpath(file_path, os.path.dirname(appdata_dir))
                         backup_zip.write(file_path, arcname=arcname)
 
+            # 3. 备份 VCPDistributedServer 目录下的 env 和 json 文件
+            dist_server_dir = os.path.join(source_dir, "VCPDistributedServer")
+            if os.path.exists(dist_server_dir):
+                print(f"正在备份 {dist_server_dir} 中的配置文件...")
+                for item in os.listdir(dist_server_dir):
+                    if item.endswith(".env") or item.endswith(".json"):
+                        item_path = os.path.join(dist_server_dir, item)
+                        if os.path.isfile(item_path):
+                            arcname = os.path.join("VCPDistributedServer", item)
+                            backup_zip.write(item_path, arcname=arcname)
+            else:
+                print(f"跳过: 目录 {dist_server_dir} 不存在")
+
         print(f"\n备份完成！")
         print(f"备份文件已保存为: {os.path.abspath(backup_filename)}")
         return backup_filename

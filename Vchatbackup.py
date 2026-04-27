@@ -29,6 +29,8 @@ def create_backup(source_dir=None, backup_attachments=False, backup_tts_cache=Fa
         "avatarimage",
         "generated_lists",
         "systemPromptPresets",
+        "DesktopWidgets",
+        "DesktopData",
         "UserData",
         "Agents",
         "AgentGroups",
